@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- ============================================
+       GADA ELECTRONICS — RETAIL SALES DASHBOARD
+       Portfolio Project HTML Page
+       ============================================ -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gada Electronics — Sales Dashboard Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    /* =============================================
+       RESET & BASE
+       ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d1117;
+      color: #e6edf3;
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       NAVIGATION BAR
+       ============================================= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(13, 17, 23, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #21262d;
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #58a6ff;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: #e6edf3;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #8b949e;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: #58a6ff; }
+
+    /* =============================================
+       HERO SECTION
+       ============================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(
+        135deg,
+        #0d1117 0%,
+        #161b22 50%,
+        #0d1117 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background dots */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(88,166,255,0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    .hero-badge {
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      color: #58a6ff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #e6edf3;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span { color: #58a6ff; }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #8b949e;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    /* KPI CARDS in Hero */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .kpi-card {
+      background: linear-gradient(135deg, #161b22, #21262d);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      border-color: #58a6ff;
+    }
+
+    .kpi-card .kpi-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .kpi-card .kpi-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #58a6ff;
+      margin-bottom: 4px;
+    }
+
+    .kpi-card .kpi-label {
+      font-size: 0.75rem;
+      color: #8b949e;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Hero Buttons */
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #238636;
+      color: white;
+    }
+    .btn-primary:hover { background: #2ea043; transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: #58a6ff;
+      border: 1px solid #58a6ff;
+    }
+    .btn-secondary:hover {
+      background: rgba(88,166,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       SECTION WRAPPER
+       ============================================= */
+    section {
+      padding: 80px 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid rgba(88, 166, 255, 0.2);
+      color: #58a6ff;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: #e6edf3;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-header p {
+      color: #8b949e;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* =============================================
+       CHART CARDS
+       ============================================= */
+    .chart-card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .chart-card:hover {
+      transform: translateY(-6px);
+      border-color: #58a6ff;
+      box-shadow: 0 12px 40px rgba(88, 166, 255, 0.15);
+    }
+
+    .chart-card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #21262d;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chart-card-header .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .chart-card-header .title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e6edf3;
+      flex: 1;
+    }
+
+    .chart-card-header .badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .chart-card img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .chart-card:hover img { transform: scale(1.01); }
+
+    .chart-card-footer {
+      padding: 14px 20px;
+      background: #0d1117;
+      font-size: 0.82rem;
+      color: #8b949e;
+      border-top: 1px solid #21262d;
+      line-height: 1.5;
+    }
+
+    .chart-card-footer strong { color: #58a6ff; }
+
+    /* =============================================
+       GRID LAYOUTS
+       ============================================= */
+    .grid-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .grid-2-1 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    /* =============================================
+       INSIGHTS SECTION
+       ============================================= */
+    .insights-section {
+      background: #161b22;
+      border-top: 1px solid #21262d;
+      border-bottom: 1px solid #21262d;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .insight-card {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .insight-card:hover {
+      border-color: #58a6ff;
+      transform: translateY(-3px);
+    }
+
+    .insight-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(88,166,255,0.2);
+      margin-bottom: 8px;
+    }
+
+    .insight-icon { font-size: 1.5rem; margin-bottom: 10px; }
+
+    .insight-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e6edf3;
+      margin-bottom: 8px;
+    }
+
+    .insight-card p {
+      font-size: 0.83rem;
+      color: #8b949e;
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       TOOLS SECTION
+       ============================================= */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .tool-card:hover {
+      border-color: #58a6ff;
+      transform: translateY(-4px);
+      background: #1c2128;
+    }
+
+    .tool-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .tool-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e6edf3;
+      margin-bottom: 6px;
+    }
+    .tool-desc { font-size: 0.78rem; color: #8b949e; }
+
+    /* =============================================
+       ABOUT / PROCESS SECTION
+       ============================================= */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .process-card {
+      text-align: center;
+      padding: 30px 20px;
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .process-card:hover {
+      border-color: #58a6ff;
+      transform: translateY(-4px);
+    }
+
+    .process-step {
+      width: 40px;
+      height: 40px;
+      background: #58a6ff;
+      color: #0d1117;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      margin: 0 auto 16px;
+    }
+
+    .process-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e6edf3;
+      margin-bottom: 8px;
+    }
+
+    .process-card p {
+      font-size: 0.8rem;
+      color: #8b949e;
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    footer {
+      background: #161b22;
+      border-top: 1px solid #21262d;
+      padding: 40px;
+      text-align: center;
+    }
+
+    footer p {
+      color: #8b949e;
+      font-size: 0.85rem;
+    }
+
+    footer p span { color: #58a6ff; font-weight: 600; }
+
+    /* =============================================
+       LIGHTBOX (Click to Enlarge)
+       ============================================= */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-overlay.active { display: flex; }
+
+    .lightbox-overlay img {
+      max-width: 95%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+      cursor: default;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px; right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    /* =============================================
+       SCROLL REVEAL ANIMATION
+       ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============================================
+       RESPONSIVE
+       ============================================= */
+    @media (max-width: 1024px) {
+      .kpi-grid       { grid-template-columns: repeat(2, 1fr); }
+      .grid-3         { grid-template-columns: repeat(2, 1fr); }
+      .insights-grid  { grid-template-columns: repeat(2, 1fr); }
+      .tools-grid     { grid-template-columns: repeat(2, 1fr); }
+      .process-grid   { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 60px 20px; }
+      .kpi-grid       { grid-template-columns: repeat(2, 1fr); }
+      .grid-2         { grid-template-columns: 1fr; }
+      .grid-2-1       { grid-template-columns: 1fr; }
+      .grid-3         { grid-template-columns: 1fr; }
+      .insights-grid  { grid-template-columns: 1fr; }
+      .tools-grid     { grid-template-columns: repeat(2, 1fr); }
+      .process-grid   { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       LIGHTBOX
+       ============================================================ -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img id="lightbox-img" src="" alt="Chart Enlarged" onclick="event.stopPropagation()"/>
+    <div class="lightbox-hint">Press ESC or click outside to close</div>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav>
+    <div class="nav-logo">🏪 Gada <span>Electronics</span></div>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#charts">Charts</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#tools">Tools</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <div class="hero" id="overview">
+
+    <div class="hero-badge">📊 Data Analytics Portfolio Project</div>
+
+    <h1>Gada Electronics<br/><span>Retail Sales Dashboard</span></h1>
+
+    <p>
+      End-to-end data analytics project transforming 500+ raw sales
+      transactions into actionable business intelligence using Python,
+      Pandas, Matplotlib, and Power BI.
+    </p>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-value">₹2.34 Cr</div>
+        <div class="kpi-label">Total Sales</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-value">₹37.8 L</div>
+        <div class="kpi-label">Total Profit</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🛒</div>
+        <div class="kpi-value">500</div>
+        <div class="kpi-label">Total Orders</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">📉</div>
+        <div class="kpi-value">16.1%</div>
+        <div class="kpi-label">Profit Margin</div>
+      </div>
+    </div>
+
+    <div class="hero-buttons">
+      <a href="#dashboard" class="btn btn-primary">🔍 View Dashboard</a>
+      <a href="https://github.com" target="_blank" class="btn btn-secondary">
+        ⭐ GitHub Repo
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       SECTION 1 — MAIN DASHBOARD
+       ============================================================ -->
+  <section id="dashboard">
+    <div class="section-header reveal">
+      <div class="section-badge">Main Overview</div>
+      <h2>📊 Complete Sales Dashboard</h2>
+      <p>Full KPI dashboard showing all key metrics at a single glance.
+         Click any chart to enlarge.</p>
+    </div>
+
+    <div class="grid-1 reveal">
+      <div class="chart-card" onclick="openLightbox('charts/01_main_dashboard.png')">
+        <div class="chart-card-header">
+          <div class="dot" style="background:#238636"></div>
+          <div class="dot" style="background:#e3b341"></div>
+          <div class="dot" style="background:#f85149"></div>
+          <span class="title">📊 Main KPI Dashboard — All Metrics</span>
+          <span class="badge" style="background:rgba(35,134,54,0.15);color:#3fb950;">
+            FEATURED
+          </span>
+        </div>
+        <img src="charts/01_main_dashboard.png" alt="Main Dashboard" />
+        <div class="chart-card-footer">
+          🔍 <strong>What this shows:</strong> Complete overview with KPI cards
+          (Total Sales, Profit, Orders, Margin), monthly trend, regional breakdown,
+          category pie chart, top products, top customers, and quarterly performance
+          — all in one view. Click to enlarge.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — TREND & REGIONAL ANALYSIS
+       ============================================================ -->
+  <section id="charts" style="background:#0d1117; max-width:100%;
+    padding: 80px 0;">
+    <div style="max-width:1300px; margin:0 auto; padding:0 40px;">
+
+      <div class="section-header reveal">
+        <div class="section-badge">Sales Trends</div>
+        <h2>📅 Sales Trends & Regional Analysis</h2>
+        <p>Monthly patterns and geographic performance breakdown.</p>
+      </div>
+
+      <div class="grid-2 reveal">
+
+        <!-- Monthly Trend -->
+        <div class="chart-card"
+             onclick="openLightbox('charts/02_monthly_sales_trend.png')">
+          <div class="chart-card-header">
+            <div class="dot" style="background:#238636"></div>
+            <div class="dot" style="background:#e3b341"></div>
+            <div class="dot" style="background:#f85149"></div>
+            <span class="title">📅 Monthly Sales Trend</span>
+            <span class="badge"
+              style="background:rgba(88,166,255,0.15);color:#58a6ff;">
+              TREND
+            </span>
+          </div>
+          <img src="charts/02_monthly_sales_trend.png" alt="Monthly Sales" />
+          <div class="chart-card-footer">
+            🔍 <strong>Insight:</strong> Identifies peak months and seasonal
+            patterns. Use this to plan inventory and marketing campaigns.
+          </div>
+        </div>
+
+        <!-- Region Analysis -->
+        <div class="chart-card"
+             onclick="openLightbox('charts/03_region_analysis.png')">
+          <div class="chart-card-header">
+            <div class="dot" style="background:#238636"></div>
+            <div class="dot" style="background:#e3b341"></div>
+            <div class="dot" style="background:#f85149"></div>
+            <span class="title">🗺️ Sales & Profit by Region</span>
+            <span class="badge"
+              style="background:rgba(248,81,73,0.15);color:#f85149;">
+              REGIONAL
+            </span>
+          </div>
+          <img src="charts/03_region_analysis.png" alt="Region Analysis" />
+          <div class="chart-card-footer">
+            🔍 <strong>Insight:</strong> Compares revenue vs profit per region.
+            A region with high sales but low profit signals cost issues.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — CATEGORY & PRODUCT ANALYSIS
+       ============================================================ -->
+  <section>
+    <div class="section-header reveal">
+      <div class="section-badge">Product Analysis</div>
+      <h2>📦 Category & Product Performance</h2>
+      <p>Which categories and products are driving revenue and profit.</p>
+    </div>
+
+    <div class="grid-1 reveal" style="margin-bottom:24px;">
+      <div class="chart-card"
+           onclick="openLightbox('charts/04_category_analysis.png')">
+        <div class="chart-card-header">
+          <div class="dot" style="background:#238636"></div>
+          <div class="dot" style="background:#e3b341"></div>
+          <div class="dot" style="background:#f85149"></div>
+          <span class="title">📦 Category Analysis — Sales, Distribution
+            & Margin</span>
+          <span class="badge"
+            style="background:rgba(227,179,65,0.15);color:#e3b341;">
+            CATEGORY
+          </span>
+        </div>
+        <img src="charts/04_category_analysis.png" alt="Category Analysis"/>
+        <div class="chart-card-footer">
+          🔍 <strong>Insight:</strong> Three-panel view showing sales share
+          (pie), total sales (bar), and average profit margin by category.
+          Accessories show highest margins — ideal for cross-selling.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-1 reveal">
+      <div class="chart-card"
+           onclick="openLightbox('charts/05_product_analysis.png')">
+        <div class="chart-card-header">
+          <div class="dot" style="background:#238636"></div>
+          <div class="dot" style="background:#e3b341"></div>
+          <div class="dot" style="background:#f85149"></div>
+          <span class="title">🏆 Top 10 Products — By Sales & Quantity</span>
+          <span class="badge"
+            style="background:rgba(63,185,80,0.15);color:#3fb950;">
+            TOP 10
+          </span>
+        </div>
+        <img src="charts/05_product_analysis.png" alt="Product Analysis"/>
+        <div class="chart-card-footer">
+          🔍 <strong>Insight:</strong> Left panel shows revenue leaders;
+          right shows volume leaders. A product may sell many units but
+          not generate the most revenue — important distinction.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — HEATMAP & MARGIN
+       ============================================================ -->
+  <section style="background:#161b22; max-width:100%; padding:80px 0;">
+    <div style="max-width:1300px; margin:0 auto; padding:0 40px;">
+
+      <div class="section-header reveal">
+        <div class="section-badge">Statistical Analysis</div>
+        <h2>🔗 Correlation & Margin Analysis</h2>
+        <p>Statistical relationships between metrics and
+           profitability spread.</p>
+      </div>
+
+      <div class="grid-2 reveal">
+
+        <div class="chart-card"
+             onclick="openLightbox('charts/06_correlation_heatmap.png')">
+          <div class="chart-card-header">
+            <div class="dot" style="background:#238636"></div>
+            <div class="dot" style="background:#e3b341"></div>
+            <div class="dot" style="background:#f85149"></div>
+            <span class="title">🔗 Correlation Heatmap</span>
+            <span class="badge"
+              style="background:rgba(88,166,255,0.15);color:#58a6ff;">
+              STATS
+            </span>
+          </div>
+          <img src="charts/06_correlation_heatmap.png"
+               alt="Correlation Heatmap"/>
+          <div class="chart-card-footer">
+            🔍 <strong>Insight:</strong> Shows how strongly metrics relate.
+            High Sales↔Profit correlation confirms healthy business.
+            Low correlation would signal discounting problems.
+          </div>
+        </div>
+
+        <div class="chart-card"
+             onclick="openLightbox('charts/07_margin_boxplot.png')">
+          <div class="chart-card-header">
+            <div class="dot" style="background:#238636"></div>
+            <div class="dot" style="background:#e3b341"></div>
+            <div class="dot" style="background:#f85149"></div>
+            <span class="title">📊 Profit Margin Distribution
+              by Category</span>
+            <span class="badge"
+              style="background:rgba(248,81,73,0.15);color:#f85149;">
+              MARGIN
+            </span>
+          </div>
+          <img src="charts/07_margin_boxplot.png"
+               alt="Margin Boxplot"/>
+          <div class="chart-card-footer">
+            🔍 <strong>Insight:</strong> Box plots show spread of margins.
+            Wide boxes = inconsistent pricing. Tight boxes = stable.
+            Any boxes touching 0% line = risk of losses.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — CUSTOMERS & TIME ANALYSIS
+       ============================================================ -->
+  <section>
+    <div class="section-header reveal">
+      <div class="section-badge">Customer & Time</div>
+      <h2>👤 Customers & Time-Based Analysis</h2>
+      <p>Who spends the most and when sales are strongest.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+
+      <div class="chart-card"
+           onclick="openLightbox('charts/08_top_customers.png')">
+        <div class="chart-card-header">
+          <div class="dot" style="background:#238636"></div>
+          <div class="dot" style="background:#e3b341"></div>
+          <div class="dot" style="background:#f85149"></div>
+          <span class="title">👤 Top 10 Customers — VIP List</span>
+          <span class="badge"
+            style="background:rgba(227,179,65,0.15);color:#e3b341;">
+            VIP
+          </span>
+        </div>
+        <img src="charts/08_top_customers.png" alt="Top Customers"/>
+        <div class="chart-card-footer">
+          🔍 <strong>Insight:</strong> Top 10 customers contribute ~25%
+          of revenue. Enroll these in VIP loyalty programmes to
+          reduce churn risk.
+        </div>
+      </div>
+
+      <div class="chart-card"
+           onclick="openLightbox('charts/09_time_analysis.png')">
+        <div class="chart-card-header">
+          <div class="dot" style="background:#238636"></div>
+          <div class="dot" style="background:#e3b341"></div>
+          <div class="dot" style="background:#f85149"></div>
+          <span class="title">⏳ Quarterly & Day-of-Week Analysis</span>
+          <span class="badge"
+            style="background:rgba(63,185,80,0.15);color:#3fb950;">
+            TIME
+          </span>
+        </div>
+        <img src="charts/09_time_analysis.png" alt="Time Analysis"/>
+        <div class="chart-card-footer">
+          🔍 <strong>Insight:</strong> Q4 dominates; weekends
+          outperform weekdays. Plan promotions and staff rosters
+          accordingly.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6 — BUSINESS INSIGHTS
+       ============================================================ -->
+  <div class="insights-section" id="insights">
+    <section>
+      <div class="section-header reveal">
+        <div class="section-badge">Business Intelligence</div>
+        <h2>💡 Key Business Insights</h2>
+        <p>12 actionable findings derived from the analysis.</p>
+      </div>
+
+      <div class="insights-grid">
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">🏆</div>
+          <div class="insight-number">01</div>
+          <h4>West Region Leads in Sales</h4>
+          <p>West region contributes the highest revenue.
+             Marketing budget should be prioritised here
+             for maximum ROI.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">📦</div>
+          <div class="insight-number">02</div>
+          <h4>Laptops Drive Most Revenue</h4>
+          <p>Laptop category generates the highest sales volume.
+             Ensure adequate stock ahead of peak months to
+             avoid stockouts.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">💎</div>
+          <div class="insight-number">03</div>
+          <h4>Accessories = Hidden Profit</h4>
+          <p>Accessories have the highest profit margin (40%+)
+             despite low sales value. Cross-sell at every
+             device purchase.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">📅</div>
+          <div class="insight-number">04</div>
+          <h4>November is the Best Month</h4>
+          <p>Sales spike in Q4 / November. Plan inventory
+             build-up in October and launch campaigns
+             2 weeks before peak.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">📉</div>
+          <div class="insight-number">05</div>
+          <h4>March Has Lowest Sales</h4>
+          <p>March is consistently the weakest month. Run
+             clearance offers and bundle deals to
+             stimulate demand.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">👤</div>
+          <div class="insight-number">06</div>
+          <h4>Top 10 = 25% of Revenue</h4>
+          <p>A small group of customers drives a large share
+             of sales. VIP loyalty programmes can protect
+             this revenue stream.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">🌍</div>
+          <div class="insight-number">07</div>
+          <h4>East Has Best Profit Margin</h4>
+          <p>Despite lower sales, East region shows the
+             highest profit margin. Investigate and
+             replicate their cost model.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">🛒</div>
+          <div class="insight-number">08</div>
+          <h4>AOV Can Be Increased</h4>
+          <p>Average Order Value of ₹46,974 can be pushed
+             15-20% higher through bundle deals and
+             upselling strategies.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">📆</div>
+          <div class="insight-number">09</div>
+          <h4>Weekends Outperform Weekdays</h4>
+          <p>Weekend sales are significantly higher. Increase
+             floor staff and run weekend-exclusive flash
+             sales to capitalise.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">⚠️</div>
+          <div class="insight-number">10</div>
+          <h4>Some Products Lose Money</h4>
+          <p>A few products show negative cumulative profit.
+             Review pricing or discontinue to protect
+             overall margins.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">📊</div>
+          <div class="insight-number">11</div>
+          <h4>Q4 Dominates Quarterly Sales</h4>
+          <p>Q4 contributes ~30% of annual revenue. Align
+             supply chain, logistics, and staffing to
+             handle the volume.</p>
+        </div>
+
+        <div class="insight-card reveal">
+          <div class="insight-icon">🔗</div>
+          <div class="insight-number">12</div>
+          <h4>Sales & Profit Are Correlated</h4>
+          <p>Strong positive correlation between sales and
+             profit shows healthy pricing discipline across
+             most product lines.</p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       SECTION 7 — PROJECT PROCESS
+       ============================================================ -->
+  <section id="process">
+    <div class="section-header reveal">
+      <div class="section-badge">Methodology</div>
+      <h2>⚙️ Project Process</h2>
+      <p>The complete analytical workflow followed in this project.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <div class="process-step">1</div>
+        <h4>Business Understanding</h4>
+        <p>Defined KPIs, business questions, and stakeholder requirements.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">2</div>
+        <h4>Data Cleaning</h4>
+        <p>Removed duplicates, fixed types, handled nulls and outliers
+           with Python & Pandas.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">3</div>
+        <h4>Feature Engineering</h4>
+        <p>Created Month, Quarter, Profit Margin %, and
+           Month-Year columns.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">4</div>
+        <h4>EDA & Visualization</h4>
+        <p>Explored all KPIs using Matplotlib and Seaborn
+           with 9 professional charts.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">5</div>
+        <h4>Power BI Dashboard</h4>
+        <p>Built interactive dashboard with DAX measures,
+           slicers, and cross-filtering.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">6</div>
+        <h4>Business Insights</h4>
+        <p>Translated data patterns into 12 actionable
+           business recommendations.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">7</div>
+        <h4>Documentation</h4>
+        <p>Created GitHub README, project docs, and this
+           portfolio presentation page.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-step">8</div>
+        <h4>Portfolio Publish</h4>
+        <p>Deployed to GitHub Pages for public access
+           and recruiter visibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 8 — TOOLS USED
+       ============================================================ -->
+  <section id="tools"
+    style="background:#161b22; max-width:100%; padding:80px 0;">
+    <div style="max-width:1300px; margin:0 auto; padding:0 40px;">
+
+      <div class="section-header reveal">
+        <div class="section-badge">Tech Stack</div>
+        <h2>🛠️ Tools & Technologies</h2>
+        <p>Every tool used in building this end-to-end project.</p>
+      </div>
+
+      <div class="tools-grid">
+        <div class="tool-card reveal">
+          <div class="tool-icon">🐍</div>
+          <div class="tool-name">Python</div>
+          <div class="tool-desc">Core language for data processing,
+            analysis, and visualisation</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">🐼</div>
+          <div class="tool-name">Pandas</div>
+          <div class="tool-desc">Data cleaning, manipulation,
+            and feature engineering</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">📊</div>
+          <div class="tool-name">Matplotlib</div>
+          <div class="tool-desc">Professional chart creation
+            and custom visualisations</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">🎨</div>
+          <div class="tool-name">Seaborn</div>
+          <div class="tool-desc">Statistical plots, heatmaps,
+            and distribution charts</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">⚡</div>
+          <div class="tool-name">Power BI</div>
+          <div class="tool-desc">Interactive dashboard with
+            DAX measures and slicers</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">📓</div>
+          <div class="tool-name">Jupyter Notebook</div>
+          <div class="tool-desc">Analysis workflow and
+            code documentation</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">🐙</div>
+          <div class="tool-name">GitHub</div>
+          <div class="tool-desc">Version control and
+            portfolio hosting via GitHub Pages</div>
+        </div>
+        <div class="tool-card reveal">
+          <div class="tool-icon">🌐</div>
+          <div class="tool-name">HTML & CSS</div>
+          <div class="tool-desc">Portfolio presentation page
+            with responsive design</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <p style="font-size:1.5rem; margin-bottom:12px;">🏪</p>
+    <p style="font-size:1rem; font-weight:700; color:#e6edf3;
+       margin-bottom:8px;">
+      Gada Electronics — Retail Sales Dashboard
+    </p>
+    <p>Built by <span>Your Name</span> &nbsp;|&nbsp;
+       Data Analytics Portfolio Project &nbsp;|&nbsp; 2024</p>
+    <p style="margin-top:8px;">
+      <a href="https://github.com" target="_blank"
+         style="color:#58a6ff; text-decoration:none;">
+        GitHub
+      </a>
+      &nbsp;·&nbsp;
+      <a href="https://linkedin.com" target="_blank"
+         style="color:#58a6ff; text-decoration:none;">
+        LinkedIn
+      </a>
+    </p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+
+    // ---- LIGHTBOX ----
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ---- SCROLL REVEAL ----
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+
+  </script>
+
+</body>
+</html>
